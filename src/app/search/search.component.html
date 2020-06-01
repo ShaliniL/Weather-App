@@ -1,0 +1,44 @@
+<section>
+    <div class="container">
+        <div class="col-md-3">
+            <div class="bg_set">
+            <form>
+                <div class="form-group">
+                  <form name="formGroup" [formGroup]="profileForm">
+                    <input type="text" placeholder="Type city name" name ="cityname"  formControlName="city_name" [(ngModel)]="city_name" />
+                    
+                    <button id="add" type="submit" class="form_button"  (click)="searchweather()">+</button>
+                </form>  
+                
+                </div>
+                </form>
+                <p>Recent locations</p>
+<ul class="list_type">
+     <li *ngFor="let cityname of cityList; let i = index">
+        <a href="javascript:void(0);" (click)="getdetails(cityname.name,i)">
+           {{cityname.name}} - {{cityname.main.temp}} C {{cityname.weather[0].main}}
+        </a>
+        <a href="javascript:void(0);" class="pull-right mr_ten" (click)="refreshweather(cityname.name,i)"> 
+            <i class="fa fa-refresh"></i>
+        </a>
+        <a href="javascript:void(0);" class="pull-right mr_ten" (click)="popitems(i)">
+            <i class="fa fa-close"></i>
+        </a>
+    </li>
+</ul>
+<button type="submit" *ngIf="cityList.length > 2"  (click)="clearall()" class="clear">Clear</button>
+</div>
+        </div>
+        <div class="col-md-9">
+            <div class="bg_set">
+                            <app-details [testname]="testname"></app-details>
+                            </div>
+           
+        </div>
+    </div>
+</section>
+
+
+
+
+ 
