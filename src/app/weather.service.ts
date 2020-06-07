@@ -1,21 +1,26 @@
-import { Injectable} from '@angular/core';
-import { observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { throwError, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
-
   constructor(private http: HttpClient) { }
   
-  configUrl = '';
+  getPresentWeatherDetails(pcityname): Observable<any> {
+    return this.http.post(environment.api_url + `weather?q=` + pcityname + environment.app_id, pcityname)
+    .pipe(catchError(this.handleError));
+  }
+  
+  getForecastdetails(pcityname) {
+    return this.http.post(environment.api_url + `forecast?q=` + pcityname + `&mode=json` + environment.app_id, pcityname)
+    .pipe(catchError(this.handleError));
+  }
 
-getConfig(city_name) {
-  return this.http.post(`http://api.openweathermap.org/data/2.5/weather?q=`+city_name+`&appid=c51223c219d6aec8cb8c5210449bd859`,city_name);
-}
-
-forcastdetails(city_name){
-  return this.http.post(`http://api.openweathermap.org/data/2.5/forecast?q=`+city_name+`&mode=json&appid=c51223c219d6aec8cb8c5210449bd859`,city_name);
-}
+  handleError(error){
+    return throwError(error.message || "Server Error");
+  }
 }
