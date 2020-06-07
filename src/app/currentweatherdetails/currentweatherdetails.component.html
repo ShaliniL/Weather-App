@@ -1,0 +1,20 @@
+<div>
+    <div class="row" *ngFor="let pdata of detialsOfWeather">
+        <div class="col-md-3">
+            <img class="img_attribute" *ngIf="pdata.weather[0].main==='Rain'" src="assets/image/rainy-1.svg" alt="" />
+            <img class="img_attribute" *ngIf="pdata.weather[0].main==='Clouds'" src="assets/image/cloudy.svg" alt="" />
+            <img class="img_attribute" *ngIf="pdata.weather[0].main==='Clear'" src="assets/image/clear.svg" alt="" />
+            <img class="img_attribute" *ngIf="pdata.weather[0].main==='Thunderstorm'" src="assets/image/thunder.svg" alt="" />
+            <img class="img_attribute" *ngIf="pdata.weather[0].main==='haze'" src="assets/image/haze.svg" alt="" />
+        </div>
+        <div class="col-md-9">
+            <div class="align_left">
+                <p>{{pdata.main.temp}}C </p>
+                <p>{{pdata.weather[0].description}}</p>
+                <p>Wind: {{pdata.wind.speed}}ms {{pdata.wind.deg}} deg</p>
+                <p>Pressure: {{pdata.main.pressure}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+

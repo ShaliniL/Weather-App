@@ -1,0 +1,18 @@
+<div *ngFor="let tempData of selectedCityData">
+    <h4>{{tempData.city.name}} <span class="pull-right"> <i class="fa fa-refresh"
+                (click)="refresh(tempData.city.name,index)"></i></span></h4>
+    <app-main-deatils [detialsOfWeather]="detialsOfWeather"></app-main-deatils>
+    <div class="clearfix"></div>
+    <div class="flex-container">
+        <div class="flex_item" *ngFor="let ldata of tempData.list">
+            <div>{{ldata.dt_txt | date:'dd'}}</div>
+            <div>{{ldata.dt_txt | date:'full'|  slice:0:3}}</div>
+            <div>
+                <img *ngIf="ldata.weather[0].main==='Rain'" src="assets/image/rainy-1.svg" alt="" />
+                <img *ngIf="ldata.weather[0].main==='Clouds'" src="assets/image/cloudy.svg" alt="" />
+                <img *ngIf="ldata.weather[0].main==='Clear'" src="assets/image/clear.svg" alt="" />
+            </div>
+            <div> {{ldata.main.temp}} C </div>
+        </div>
+    </div>
+</div>
